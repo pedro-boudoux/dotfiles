@@ -1,0 +1,17 @@
+width=660  # increased to allow outer padding
+height=410
+
+location=center
+show=drun
+prompt=Look up...
+filter_rate=100
+allow_markup=true
+no_actions=true
+halign=fill
+orientation=vertical
+content_halign=fill
+insensitive=true
+allow_images=true
+image_size=40
+gtk_dark=true
+normal_window=true
