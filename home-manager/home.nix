@@ -15,6 +15,7 @@ let
     papirus-icon-theme
     bibata-cursors
     mako
+    gnome-keyring
   ];
 
   imports = [
@@ -39,6 +40,14 @@ let
   programs.waybar.enable = true;
   programs.home-manager.enable = true;
 
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      serif = ["Tinos Nerd Font"];
+      sansSerif = ["Work Sans"];
+      monospace = ["MartianMono Nerd Font Mono"];
+    };
+  };
 
   gtk = {
       enable = true;
@@ -66,4 +75,14 @@ let
       size = 24;
       gtk.enable = true;
     };
+
+    services.gnome-keyring = {
+      enable = true;
+      components = ["secrets" "pkcs11" "ssh"];
+    };
+
+    xdg.portal.config.common = {
+      "org.freedesktop.impl.portal.Secret" = "gnome-keyring";
+    };
+
 }

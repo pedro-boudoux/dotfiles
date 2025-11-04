@@ -156,7 +156,6 @@ layer-rule {
 }
 
 window-rule {
-    geometry-corner-radius 15
 }
 
 binds {
