@@ -62,7 +62,6 @@
 	clang
 	cmake
 	gcc
-	obs-studio
 	gnumake
 	nodejs
   ffmpeg
@@ -74,6 +73,8 @@
   telegram-desktop
   ollama
   font-manager
-
+  audacity
+  ytdownloader
+  starship
   ];
 }

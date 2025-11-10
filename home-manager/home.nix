@@ -9,6 +9,7 @@ let
   home.homeDirectory = "/home/pedro";
   home.stateVersion = "25.05"; # Please read the comment before changing.
 
+
   home.packages = with pkgs; [
     niri
     orchis-theme
@@ -16,6 +17,8 @@ let
     bibata-cursors
     mako
     gnome-keyring
+    starship
+    fish
   ];
 
   imports = [
@@ -25,6 +28,7 @@ let
      "${modulesDir}/zed.nix"
      "${modulesDir}/waybar"
      "${modulesDir}/mako"
+     #"${modulesDir}/starship"
    ];
 
    home.file = {
@@ -32,8 +36,7 @@ let
      ".config/waybar/style.css".source = "/home/pedro/dotfiles/home-manager/modules/waybar/style.css";
    };
 
-
-  home.sessionVariables = {
+     home.sessionVariables = {
     # placeholder
   };
 

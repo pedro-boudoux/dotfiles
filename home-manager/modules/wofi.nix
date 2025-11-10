@@ -26,6 +26,11 @@
 
     style =
     ''
+      * {
+        font-family: monospace;
+        font-weight: 600;
+      }
+
       window {
           margin: 0px;
           background: rgba(20, 20, 20, 0.8);

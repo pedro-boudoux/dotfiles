@@ -13,12 +13,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot = {
-      extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+    kernelModules = [ "v4l2loopback" ];
+    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
       extraModprobeConfig = ''
         options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
       '';
       kernelParams = ["nvidia-drm.modeset=1"];
   };
+
+  boot.initrd.availableKernelModules = [ "nvidia_uvm" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -59,6 +62,16 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      libvdpau-va-gl
+    ];
+
+  };
 
 
   # Enable networking
@@ -87,6 +100,7 @@
     description = "pedro";
     extraGroups = [ "networkmanager" "wheel" "libvirtd"];
     packages = with pkgs; [];
+    shell = pkgs.fish;
   };
 
   # Enable automatic login for the user.
@@ -111,9 +125,14 @@
   # $ nix search wget
 
 
+  programs.obs-studio ={
+    enable = true;
+    package = (pkgs.obs-studio.override { cudaSupport = true; });
+  };
 
 
   programs.thunderbird.enable = true;
+  programs.fish.enable = true;
 
   programs.steam ={
     enable = true;
