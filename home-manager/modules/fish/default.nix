@@ -6,5 +6,9 @@
       hms = "home-manager switch --flake \"/home/pedro/dotfiles/home-manager#pedro\" --impure";
       nrs = "sudo nixos-rebuild switch";
     };
+    interactiveShellInit = ''
+      set -g fish_greeting
+      fastfetch
+    '';
   };
 }

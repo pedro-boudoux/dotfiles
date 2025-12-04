@@ -14,6 +14,7 @@
             "material-icon-theme"
             "java"
             "typst"
+            "vscode-dark-modern"
         ];
 
         extraPackages = [pkgs.nixd];
@@ -24,9 +25,10 @@
             theme = {
                 mode = "dark";
                 light = "default";
-                dark = "Darcula Dark";
+                dark = "VSCode Dark Modern";
             };
             ui_font_size = lib.mkForce 16;
+            buffer_font_size = lib.mkForce 15;
             relative_line_numbers = true;
             buffer_font_family = "MartianMono Nerd Font Mono";
             ui_font_family = "MartianMono Nerd Font Mono";

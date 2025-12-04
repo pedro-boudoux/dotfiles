@@ -1,27 +1,29 @@
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./packages.nix
-      ./fonts.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./packages.nix
+    ./fonts.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot = {
-    kernelModules = [ "v4l2loopback" ];
-    extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
-      extraModprobeConfig = ''
-        options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-      '';
-      kernelParams = ["nvidia-drm.modeset=1"];
+    kernelModules = ["v4l2loopback"];
+    extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+    extraModprobeConfig = ''
+      options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+    '';
+    kernelParams = ["nvidia-drm.modeset=1"];
   };
 
-  boot.initrd.availableKernelModules = [ "nvidia_uvm" ];
+  boot.initrd.availableKernelModules = ["nvidia_uvm"];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -30,9 +32,9 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
- security.rtkit.enable = true;
+  security.rtkit.enable = true;
 
- services.pipewire = {
+  services.pipewire = {
     enable = true; # if not already enabled
     alsa.enable = true;
     alsa.support32Bit = true;
@@ -49,12 +51,12 @@
   };
 
   hardware.graphics = {
-  	enable = true;
+    enable = true;
   };
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware.nvidia = {
-  	modesetting.enable = true;
+    modesetting.enable = true;
     powerManagement.enable = false;
     powerManagement.finegrained = false;
     open = false;
@@ -70,9 +72,7 @@
       nvidia-vaapi-driver
       libvdpau-va-gl
     ];
-
   };
-
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -98,7 +98,7 @@
   users.users.pedro = {
     isNormalUser = true;
     description = "pedro";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd"];
+    extraGroups = ["networkmanager" "wheel" "libvirtd" "docker"];
     packages = with pkgs; [];
     shell = pkgs.fish;
   };
@@ -117,24 +117,21 @@
     };
   };
 
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-
-  programs.obs-studio ={
+  programs.obs-studio = {
     enable = true;
-    package = (pkgs.obs-studio.override { cudaSupport = true; });
+    package = pkgs.obs-studio.override {cudaSupport = true;};
   };
-
 
   programs.thunderbird.enable = true;
   programs.fish.enable = true;
 
-  programs.steam ={
+  programs.steam = {
     enable = true;
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
@@ -142,45 +139,43 @@
   };
 
   programs.niri = {
-  	enable = true;
+    enable = true;
   };
 
-programs.waybar = {
-  enable = true;
-};
+  programs.waybar = {
+    enable = true;
+  };
 
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.enable = true;
+  virtualisation.docker.enable = true;
 
-programs.virt-manager.enable = true;
-virtualisation.libvirtd.enable = true;
+  xdg.portal = {
+    enable = true;
+    # Keep gtk for file choosers, but prioritize wlr for screen/window operations
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+      # The gnome portal is likely unnecessary with niri/wlr/gtk
+      # pkgs.xdg-desktop-portal-gnome
+    ];
+    config = {
+      # Set the default for the common case to wlr
+      # Many apps will use the default before looking at session-specific configs
+      common.default = "wlr";
 
-xdg.portal = {
-  enable = true;
-  # Keep gtk for file choosers, but prioritize wlr for screen/window operations
-  extraPortals = [
-    pkgs.xdg-desktop-portal-gtk
-    pkgs.xdg-desktop-portal-wlr
-    # The gnome portal is likely unnecessary with niri/wlr/gtk
-    # pkgs.xdg-desktop-portal-gnome
-  ];
-  config = {
-    # Set the default for the common case to wlr
-    # Many apps will use the default before looking at session-specific configs
-    common.default = "wlr";
-
-    niri = {
-      # Fallback defaults for niri sessions
-      default = [ "wlr" "gtk" ];
-      # Explicitly use the wlr portal for screensharing and screenshots
-      "org.freedesktop.impl.portal.ScreenCast" = [ "wlr" ];
-      "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+      niri = {
+        # Fallback defaults for niri sessions
+        default = ["wlr" "gtk"];
+        # Explicitly use the wlr portal for screensharing and screenshots
+        "org.freedesktop.impl.portal.ScreenCast" = ["wlr"];
+        "org.freedesktop.impl.portal.Screenshot" = ["wlr"];
+      };
     };
   };
-};
-systemd.user.services.xdg-desktop-portal.enable = true;
+  systemd.user.services.xdg-desktop-portal.enable = true;
 
-
-
-# Some programs need SUID wrappers, can be configured further or are
+  # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
@@ -193,13 +188,14 @@ systemd.user.services.xdg-desktop-portal.enable = true;
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-   services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = true;
+  services.cloudflare-warp.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -208,5 +204,4 @@ systemd.user.services.xdg-desktop-portal.enable = true;
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }

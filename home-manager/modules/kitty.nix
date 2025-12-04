@@ -4,7 +4,7 @@
   programs.kitty = {
     enable = true;
 
-    theme = "Jet Brains Darcula";
+    themeFile = "Jet Brains Darcula";
 
     font = {
       name = "MartianMono Nerd Font Mono";

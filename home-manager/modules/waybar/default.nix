@@ -13,7 +13,7 @@
         # Add cpu, memory explicitly here if you want them on the bar
         modules-left = ["niri/workspaces" "niri/window"];
         modules-center = ["clock"];
-        modules-right = ["cpu" "memory" "network" "pulseaudio"];
+        modules-right = ["tray" "cpu" "memory" "network" "pulseaudio"];
 
         clock = {
           format = "{:%a %b %d %H:%M}";

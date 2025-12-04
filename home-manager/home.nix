@@ -2,12 +2,15 @@
 
 let
   modulesDir = ./modules;
-  niriConfigPath = ../niri/config.kdl;
+  nixvim = import (builtins.fetchGit {
+  	url = "https://github.com/nix-community/nixvim";
+  });
   in
 {
   home.username = "pedro";
   home.homeDirectory = "/home/pedro";
   home.stateVersion = "25.05"; # Please read the comment before changing.
+
 
 
   home.packages = with pkgs; [
@@ -22,18 +25,23 @@ let
   ];
 
   imports = [
+    nixvim.homeModules.nixvim
     "${modulesDir}/kitty.nix"
      "${modulesDir}/swww.nix"
      "${modulesDir}/wofi.nix"
      "${modulesDir}/zed.nix"
      "${modulesDir}/waybar"
      "${modulesDir}/mako"
-     #"${modulesDir}/starship"
+     "${modulesDir}/starship"
+     "${modulesDir}/fish"
+     #"${modulesDir}/nvim"
    ];
 
    home.file = {
      ".config/niri/config.kdl".source = "/home/pedro/dotfiles/niri/config.kdl";
      ".config/waybar/style.css".source = "/home/pedro/dotfiles/home-manager/modules/waybar/style.css";
+     ".config/quickshell".source = "/home/pedro/dotfiles/home-manager/modules/quickshell";
+
    };
 
      home.sessionVariables = {
@@ -43,7 +51,7 @@ let
   programs.waybar.enable = true;
   programs.home-manager.enable = true;
 
-  fonts.fontconfig = {
+    fonts.fontconfig = {
     enable = true;
     defaultFonts = {
       serif = ["Tinos Nerd Font"];
