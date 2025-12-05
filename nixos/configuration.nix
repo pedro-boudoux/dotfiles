@@ -52,6 +52,11 @@
 
   hardware.graphics = {
     enable = true;
+    enable32Bit = true;
+     extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      libvdpau-va-gl
+    ];
   };
   services.xserver.videoDrivers = ["nvidia"];
 
@@ -64,15 +69,6 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
-  hardware.opengl = {
-    enable = true;
-    driSupport32Bit = true;
-
-    extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-      libvdpau-va-gl
-    ];
-  };
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -123,6 +119,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+  
   programs.obs-studio = {
     enable = true;
     package = pkgs.obs-studio.override {cudaSupport = true;};

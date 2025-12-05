@@ -1,10 +1,7 @@
-{ config, pkgs, lib, home-manager, ... }:
+{ pkgs ,... }:
 
 let
   modulesDir = ./modules;
-  nixvim = import (builtins.fetchGit {
-  	url = "https://github.com/nix-community/nixvim";
-  });
   in
 {
   home.username = "pedro";
@@ -25,11 +22,9 @@ let
   ];
 
   imports = [
-    nixvim.homeModules.nixvim
     "${modulesDir}/kitty.nix"
      "${modulesDir}/swww.nix"
      "${modulesDir}/wofi.nix"
-     "${modulesDir}/zed.nix"
      "${modulesDir}/waybar"
      "${modulesDir}/mako"
      "${modulesDir}/starship"
@@ -37,10 +32,10 @@ let
      #"${modulesDir}/nvim"
    ];
 
+
    home.file = {
-     ".config/niri/config.kdl".source = "/home/pedro/dotfiles/niri/config.kdl";
+     ".config/niri/config.kdl".source = "/home/pedro/dotfiles/home-manager/modules/niri/config.kdl";
      ".config/waybar/style.css".source = "/home/pedro/dotfiles/home-manager/modules/waybar/style.css";
-     ".config/quickshell".source = "/home/pedro/dotfiles/home-manager/modules/quickshell";
 
    };
 
@@ -59,6 +54,7 @@ let
       monospace = ["MartianMono Nerd Font Mono"];
     };
   };
+
 
   gtk = {
       enable = true;
@@ -86,6 +82,7 @@ let
       size = 24;
       gtk.enable = true;
     };
+
 
     services.gnome-keyring = {
       enable = true;

@@ -4,7 +4,7 @@
     fonts.packages = with pkgs; [
       nerd-fonts.jetbrains-mono
       corefonts
-      vistafonts
+      vista-fonts
       inter-nerdfont
       font-awesome
       nerd-fonts.martian-mono

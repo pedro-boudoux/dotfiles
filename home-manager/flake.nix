@@ -1,29 +1,29 @@
+# flake.nix
 {
-	description = "Pedro's Home Manager Configuration";
+  description = "Pedro's Home Manager Config";
 
-	inputs = {
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-		nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-		home-manager = {
-			url = "github:nix-community/home-manager";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
-	};
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-	outputs = {nixpkgs, home-manager,  ...}:
-		let
-
-		system = "x86_64-linux";
-		pkgs = nixpkgs.legacyPackages.${system};
+  };
 
 
-		in {
-		homeConfigurations."pedro" = home-manager.lib.homeManagerConfiguration {
-				inherit pkgs;
-				modules = [
-				./home.nix
-];
-			};
-		};
-
+  outputs = { self, nixpkgs, home-manager, ... }:
+    let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      homeConfigurations."pedro" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [
+          ./home.nix
+        ];
+      };
+    };
 }

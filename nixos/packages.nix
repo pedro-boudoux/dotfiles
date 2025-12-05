@@ -10,14 +10,11 @@
     firefox
     niri
     wofi
-    vscode
     spotify
-    prismlauncher
     helvum
     pipewire
     pulseaudio
     pavucontrol
-    zed-editor
     kitty
     swww
     waybar
@@ -30,8 +27,6 @@
     gtk3
     gtk2
     xwayland-satellite
-    postman
-    kdePackages.kdeconnect-kde
     obsidian
     rclone
     wine
@@ -47,41 +42,23 @@
     kdePackages.okular
     cava
     xournalpp
-    vesktop
     steam
-    lunar-client
-    mpg123
-    typst
-    typst-live
     grim
     slurp
     swappy
     htop
     libreoffice
-    libgcc
-    clang
-    cmake
-    gcc
-    gnumake
-    nodejs
     ffmpeg
     beeper
-    python3
     tree
-    gemini-cli
-    telegram-desktop
     ollama
     font-manager
     audacity
-    ytdownloader
     starship
-    remmina
-    pipx
-    rPackages.RobLox
-    vinegar
     bruno
     signal-desktop
-    quickshell
     helix
+    code-cursor
+    localsend
   ];
 }
