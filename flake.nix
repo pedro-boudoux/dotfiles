@@ -48,9 +48,9 @@
       };
 
       # THE LAPTOP
-      laptop-hostname = nixpkgs.lib.nixosSystem {
+      laptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = {inherit inputs;}; # fix: needed for inputs to pass down
+        specialArgs = {inherit inputs;}; 
         modules = [
           ./hosts/laptop
           ./modules/nixos/packages.nix
@@ -60,7 +60,6 @@
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.users.pedro = import ./modules/home/default.nix;
-            # assumed you want nvf here too
             home-manager.sharedModules = [ nvf.homeManagerModules.default ];
           }
         ];
