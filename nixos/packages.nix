@@ -60,5 +60,7 @@
     helix
     code-cursor
     localsend
+    vesktop
+    bootiso
   ];
 }

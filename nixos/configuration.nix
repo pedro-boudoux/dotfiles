@@ -24,6 +24,7 @@
   };
 
   boot.initrd.availableKernelModules = ["nvidia_uvm"];
+  boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -143,9 +144,9 @@
     enable = true;
   };
 
-  programs.waybar = {
-    enable = true;
-  };
+  #programs.waybar = {
+  #  enable = true;
+  #};
 
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
@@ -156,7 +157,7 @@
     # Keep gtk for file choosers, but prioritize wlr for screen/window operations
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-wlr
+      #      pkgs.xdg-desktop-portal-wlr
       # The gnome portal is likely unnecessary with niri/wlr/gtk
       # pkgs.xdg-desktop-portal-gnome
     ];

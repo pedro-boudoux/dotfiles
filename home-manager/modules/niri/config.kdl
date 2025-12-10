@@ -1,3 +1,7 @@
+debug {
+  render-drm-device "/dev/dri/renderD128"
+}
+
 input {
     keyboard {
         xkb {
@@ -39,11 +43,9 @@ input {
 }
 
 // Monitor output settings
-output "DP-4" {
+output "DP-1" {
     mode "2560x1440@165.003"
-    scale 1
-    transform "normal"
-    position x=1280 y=0
+    variable-refresh-rate
 }
 
 layout {
@@ -116,10 +118,11 @@ layout {
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 //spawn-at-startup "waybar"
+//spawn-at-startup "dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" "DISPLAY"
+//spawn-at-startup "systemctl" "--user" "stop" "dank-material-shell.service" 
+//spawn-at-startup "systemctl" "--user" "start" "dank-material-shell.service"
 spawn-sh-at-startup "rclone mount gdrive: /home/pedro/gdrive --vfs-cache-mode writes"
 spawn-sh-at-startup "swww-daemon & sleep 1"
-spawn-sh-at-startup "sleep 2; mpg123 /home/pedro/dotfiles/sounds/start-up.mp3"
-spawn-sh-at-startup "swww img /home/pedro/dotfiles/wallpapers/One-Battle-After-Another-scaled.jpg"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -165,7 +168,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+E {spawn "thunar";}
-    Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi" "--show" "drun"; }
+    Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+S { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
 
