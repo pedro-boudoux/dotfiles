@@ -10,7 +10,6 @@
     firefox
     niri
     wofi
-    spotify
     helvum
     pipewire
     pulseaudio
@@ -62,5 +61,6 @@
     localsend
     vesktop
     bootiso
+    spotify
   ];
 }
