@@ -12,6 +12,6 @@
       font-awesome
       nerd-fonts.tinos
       nerd-fonts.dejavu-sans-mono
-      nerd-fonts.hack
+      nerd-fonts.commit-mono
     ];
 }
