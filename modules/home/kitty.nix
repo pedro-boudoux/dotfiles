@@ -5,7 +5,7 @@
     enable = true;
 
     font = {
-      name = "MartianMono Nerd Font Mono";
+      name = "Hack Nerd Font Mono";
       size = 12;
     };
 
