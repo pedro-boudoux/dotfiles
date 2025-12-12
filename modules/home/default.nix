@@ -10,6 +10,7 @@
     ./fish
     ./matugen
     ./nvf
+    ./tmux
     # ./waybar # was commented out in original
   ];
 
@@ -26,8 +27,7 @@
     fish
     spicetify-cli
     matugen
-    nil
-    alejandra
+    tmux
   ];
 
   programs.dankMaterialShell.enable = true;

@@ -9,6 +9,11 @@
     interactiveShellInit = ''
       set -g fish_greeting
       fastfetch
+      
+      if not set -q TMUX
+        tmux attach -t main; or tmux new -s main
+      end
+
     '';
   };
 }

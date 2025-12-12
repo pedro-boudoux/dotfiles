@@ -26,6 +26,9 @@
 
         # DARCULA THEME
         extraPlugins = with pkgs.vimPlugins; {
+          vim-svelte = {
+            package = pkgs.vimPlugins.vim-svelte;
+          };
           darcula-solid = {
             package = pkgs.vimUtils.buildVimPlugin {
               name = "darcula-dark.nvim";
@@ -74,11 +77,29 @@
         statusline.lualine.enable = true;
         telescope.enable = true;
         autocomplete.nvim-cmp.enable = true;
-        treesitter.enable = true;
+        treesitter = {
+          enable = true;
+          addDefaultGrammars = true;
+          grammars = [pkgs.vimPlugins.nvim-treesitter-parsers.svelte];
+        };
         autopairs.nvim-autopairs.enable = true;
 
         # LANGUAGES
+
+        extraPackages = [pkgs.nodePackages.svelte-language-server];
+
+        lsp.lspconfig.sources.svelte = ''
+                lspconfig.svelte.setup({
+            on_attach = on_attach,
+            capabilities = capabilities,
+            filetypes = { "svelte" },
+          })
+        '';
+
         lsp.enable = true;
+
+        lsp.null-ls.enable = true;
+
         languages = {
           enableTreesitter = true;
 
@@ -102,6 +123,26 @@
             enable = true;
           };
 
+          rust = {
+            enable = true;
+            crates.enable = true;
+          };
+
+          ts = {
+            enable = true;
+            lsp.enable = true;
+            treesitter.enable = true;
+            format = {
+              enable = true;
+              type = "prettier";
+            };
+          };
+
+          html.enable = true;
+          css.enable = true;
+          tailwind.enable = true;
+
+          #          json.enable = true;
           markdown.enable = true;
         };
 
@@ -113,6 +154,14 @@
           number = true;
           wrap = true;
           clipboard = "unnamedplus";
+        };
+
+        utility.smart-splits = {
+          enable = true;
+
+          #mappings = {
+          #enableMappings = true;
+          #};
         };
 
         # KEYBINDS

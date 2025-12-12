@@ -62,5 +62,16 @@
     vesktop
     bootiso
     spotify
+    nil
+    alejandra
+    svelte-language-server
+    bash-language-server
+    nginx-language-server
+    tailwindcss-language-server
+    postgres-language-server
+    rust-analyzer
+    pkgs.nodePackages.typescript-language-server
+    drawing
+    vlc
   ];
 }
