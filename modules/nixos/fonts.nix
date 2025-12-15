@@ -13,5 +13,6 @@
       nerd-fonts.tinos
       nerd-fonts.dejavu-sans-mono
       nerd-fonts.commit-mono
+      googlesans-code
     ];
 }

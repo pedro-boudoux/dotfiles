@@ -73,6 +73,5 @@
     pkgs.nodePackages.typescript-language-server
     drawing
     vlc
-    figma-linux
   ];
 }

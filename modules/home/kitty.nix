@@ -5,7 +5,8 @@
     enable = true;
 
     font = {
-      name = "CommitMono Nerd Font";
+      #name = "CommitMono Nerd Font";
+      name = "Google Sans Code";
       size = 12;
     };
 
