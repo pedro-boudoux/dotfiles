@@ -4,6 +4,7 @@
 
     settings = {
       vim = {
+        git.enable = true;
         # LUA CONFIGS TO IGNORE WARNINGS
         luaConfigRC = {
           "000_no_deprecation_warnings" = ''
@@ -26,6 +27,10 @@
 
         # DARCULA THEME
         extraPlugins = with pkgs.vimPlugins; {
+          git-conflict-nvim = {
+            package = git-conflict-nvim;
+            setup = "require('git-conflict').setup()";
+          };
           vim-svelte = {
             package = pkgs.vimPlugins.vim-svelte;
           };

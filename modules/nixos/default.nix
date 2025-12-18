@@ -18,6 +18,7 @@
   networking.firewall.enable = true;
   services.openssh.enable = true;
   services.cloudflare-warp.enable = true;
+  services.mullvad-vpn.enable = true;
 
   # audio
   security.rtkit.enable = true;

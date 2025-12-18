@@ -73,5 +73,7 @@
     pkgs.nodePackages.typescript-language-server
     drawing
     vlc
+    mullvad-vpn
+    deluge
   ];
 }
