@@ -17,7 +17,6 @@
   networking.networkmanager.enable = true;
   networking.firewall.enable = true;
   services.openssh.enable = true;
-  services.cloudflare-warp.enable = true;
   services.mullvad-vpn.enable = true;
 
   # audio

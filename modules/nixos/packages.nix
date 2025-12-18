@@ -74,6 +74,6 @@
     drawing
     vlc
     mullvad-vpn
-    deluge
+    qbittorrent
   ];
 }
