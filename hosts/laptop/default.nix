@@ -1,15 +1,36 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/nixos/default.nix
     ./hardware-configuration.nix # ensure you moved this file here
   ];
 
-  networking.hostName = "laptop"; 
+  networking.hostName = "laptop";
 
   # bootloader specifics
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  
+
+  services.dbus.enable = true;
+  services.upower.enable = true;
+
+  security.polkit.enable = true;
+
+  systemd.user.services.polkit-gnome-authentication-agent-1 = {
+    description = "polkit-gnome-authentication-agent-1";
+    wantedBy = ["graphical-session.target"];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+      Restart = "on-failure";
+      RestartSec = 1;
+      TimeoutStopSec = 10;
+    };
+  };
+
   # nvidia kernel hell
   #boot.kernelModules = [ "v4l2loopback" ];
   #boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
@@ -24,7 +45,7 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-   # extraPackages = with pkgs; [ nvidia-vaapi-driver libvdpau-va-gl ];
+    # extraPackages = with pkgs; [ nvidia-vaapi-driver libvdpau-va-gl ];
   };
   #services.xserver.videoDrivers = [ "nvidia" ];
 
