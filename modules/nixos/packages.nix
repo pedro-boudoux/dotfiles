@@ -75,5 +75,8 @@
     vlc
     mullvad-vpn
     qbittorrent
+    vscode
+    devcontainer
+    lazydocker
   ];
 }
