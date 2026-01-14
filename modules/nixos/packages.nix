@@ -80,5 +80,7 @@
     lazydocker
     devpod
     opencode
+    python3
+    chromium
   ];
 }
