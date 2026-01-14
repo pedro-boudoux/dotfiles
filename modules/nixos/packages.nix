@@ -78,5 +78,7 @@
     vscode
     devcontainer
     lazydocker
+    devpod
+    opencode
   ];
 }

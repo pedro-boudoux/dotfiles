@@ -27,6 +27,15 @@
 
         # DARCULA THEME
         extraPlugins = with pkgs.vimPlugins; {
+          remote-nvim = {
+            package = pkgs.vimPlugins.remote-nvim-nvim;
+            setup = ''
+              require("remote-nvim").setup({
+                -- configuring devpod is usually optional if it's in your PATH
+                -- but if it breaks, point to it explicitly here
+              })
+            '';
+          };
           git-conflict-nvim = {
             package = git-conflict-nvim;
             setup = "require('git-conflict').setup()";
