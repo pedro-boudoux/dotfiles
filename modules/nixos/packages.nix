@@ -82,5 +82,6 @@
     opencode
     python3
     chromium
+    docker-compose
   ];
 }
