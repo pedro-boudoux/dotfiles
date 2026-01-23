@@ -54,6 +54,24 @@
 
   programs.home-manager.enable = true;
 
+  programs.git = {
+    enable = true;
+    extraConfig = {
+      pull.rebase = false;
+      user.name = "Pedro";
+      user.email = "pboudoux@outlook.com";
+      core.editor = "code";
+      init.defaultBranch = "main";
+      # merge.tool = "vimdiff";
+      # diff.tool = "vimdiff";
+      color.ui = true;
+      # push.default = "simple";
+      # pull.ff = "only";
+      rebase.autoStash = true;
+      credential.helper = "store";
+    };
+  };
+
   fonts.fontconfig = {
     enable = true;
     defaultFonts = {
