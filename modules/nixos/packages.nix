@@ -83,5 +83,8 @@
     python3
     chromium
     docker-compose
+    antigravity
+    unzip
+    gimp
   ];
 }

@@ -22,6 +22,8 @@
         # THEMING
         theme = {
           enable = true; # Must be true or nvf breaks
+          name = "gruvbox";
+          style = "dark";
           transparent = false;
         };
 
@@ -60,7 +62,6 @@
           };
           melange = {
             package = melange-nvim;
-            setup = "vim.cmd.colorscheme('melange')";
           };
           everforest = {
             package = everforest;
