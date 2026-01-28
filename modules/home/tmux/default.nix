@@ -40,12 +40,17 @@
     # rage-quit pane
     bind-key x kill-pane
 
+
     # splits
     bind-key | split-window -h -c "#{pane_current_path}"
     bind-key - split-window -v -c "#{pane_current_path}"
 
     # 'c' for new window
     bind-key c new-window -c "#{pane_current_path}"
+
+    # mouse copy
+    bind-key -T copy-mode-vi MouseDragEnd1Pane send-keys -X copy-pipe-and-cancel "wl-copy"
+    bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "wl-copy"
           '';
 
   };

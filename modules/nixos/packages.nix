@@ -86,5 +86,7 @@
     antigravity
     unzip
     gimp
+    texlive.combined.scheme-full
+    zathura
   ];
 }

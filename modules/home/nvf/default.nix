@@ -29,6 +29,12 @@
 
         # DARCULA THEME
         extraPlugins = with pkgs.vimPlugins; {
+          vimtex = {
+            package = vimtex;
+            setup = ''
+              vim.g.vimtex_view_method = 'zathura'
+            '';
+          };
           remote-nvim = {
             package = pkgs.vimPlugins.remote-nvim-nvim;
             setup = ''
@@ -86,7 +92,7 @@
 
         # VISUALS
         visuals = {
-          nvimWebDevicons.enable = true;
+          nvim-web-devicons.enable = true;
         };
 
         statusline.lualine.enable = true;
@@ -101,13 +107,23 @@
 
         # LANGUAGES
 
-        extraPackages = [pkgs.nodePackages.svelte-language-server];
+        extraPackages = [
+          pkgs.nodePackages.svelte-language-server
+          pkgs.texlab
+        ];
 
         lsp.lspconfig.sources.svelte = ''
                 lspconfig.svelte.setup({
             on_attach = on_attach,
             capabilities = capabilities,
             filetypes = { "svelte" },
+          })
+        '';
+
+        lsp.lspconfig.sources.texlab = ''
+          lspconfig.texlab.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
           })
         '';
 

@@ -39,7 +39,7 @@
       PartOf = ["graphical-session.target"];
     };
     Service = {
-      ExecStart = "${inputs.dankMaterialShell.packages.${pkgs.system}.default}/bin/dms run";
+      ExecStart = "${inputs.dankMaterialShell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/dms run";
       Restart = "on-failure";
       RestartSec = 5;
     };
@@ -56,7 +56,7 @@
 
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       pull.rebase = false;
       user.name = "Pedro";
       user.email = "pboudoux@outlook.com";
