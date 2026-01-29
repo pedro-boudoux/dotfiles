@@ -14,6 +14,7 @@
               if string.find(msg, "framework.*is deprecated") then return end
               _notify(msg, ...)
             end
+            vim.g.maplocalleader = "\\"
           '';
         };
 
@@ -29,6 +30,26 @@
 
         # DARCULA THEME
         extraPlugins = with pkgs.vimPlugins; {
+          nvim-surround = {
+            package = nvim-surround;
+            setup = "require('nvim-surround').setup()";
+          };
+          barbar = {
+            package = barbar-nvim;
+            setup = "require('barbar').setup()";
+          };
+          precognition = {
+            package = pkgs.vimUtils.buildVimPlugin {
+              name = "precognition.nvim";
+              src = pkgs.fetchFromGitHub {
+                owner = "tris203";
+                repo = "precognition.nvim";
+                rev = "main";
+                hash = "sha256-0xoWOLY6wFR31nAzOLtMdgdzbNDsGDDOiBQ0vGX5niw=";
+              };
+            };
+            setup = "require('precognition').setup()";
+          };
           vimtex = {
             package = vimtex;
             setup = ''
@@ -214,6 +235,17 @@
             silent = true;
             desc = "Format Code";
           };
+
+          # VimTeX Bindings
+          "<leader>ll" = { action = ":VimtexCompile<CR>"; desc = "VimTeX Compile"; };
+          "<leader>lv" = { action = ":VimtexView<CR>"; desc = "VimTeX View"; };
+          "<leader>lk" = { action = ":VimtexStop<CR>"; desc = "VimTeX Stop"; };
+          "<leader>lc" = { action = ":VimtexClean<CR>"; desc = "VimTeX Clean"; };
+
+          # Barbar Bindings
+          "<A-,>" = { action = ":BufferPrevious<CR>"; desc = "Previous Buffer"; };
+          "<A-.>" = { action = ":BufferNext<CR>"; desc = "Next Buffer"; };
+          "<A-c>" = { action = ":BufferClose<CR>"; desc = "Close Buffer"; };
         };
 
         # PLUGINS
