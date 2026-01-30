@@ -205,6 +205,7 @@
           relativenumber = true;
           number = true;
           wrap = true;
+          scrolloff = 15;
           clipboard = "unnamedplus";
         };
 

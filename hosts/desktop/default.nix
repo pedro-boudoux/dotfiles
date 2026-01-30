@@ -54,4 +54,11 @@
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
   };
+
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+    # loadModels = [];  # Add models here once kimi-k2-thinking is published
+  };
+  
 }
