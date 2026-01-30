@@ -38,18 +38,18 @@
             package = barbar-nvim;
             setup = "require('barbar').setup()";
           };
-          precognition = {
-            package = pkgs.vimUtils.buildVimPlugin {
-              name = "precognition.nvim";
-              src = pkgs.fetchFromGitHub {
-                owner = "tris203";
-                repo = "precognition.nvim";
-                rev = "main";
-                hash = "sha256-0xoWOLY6wFR31nAzOLtMdgdzbNDsGDDOiBQ0vGX5niw=";
-              };
-            };
-            setup = "require('precognition').setup()";
-          };
+          #precognition = {
+          #  package = pkgs.vimUtils.buildVimPlugin {
+          #    name = "precognition.nvim";
+          #    src = pkgs.fetchFromGitHub {
+          #      owner = "tris203";
+          #      repo = "precognition.nvim";
+          #      rev = "main";
+          #      hash = "sha256-0xoWOLY6wFR31nAzOLtMdgdzbNDsGDDOiBQ0vGX5niw=";
+          #    };
+          #  };
+          #  setup = "require('precognition').setup()";
+          #};
           vimtex = {
             package = vimtex;
             setup = ''
@@ -205,8 +205,14 @@
           relativenumber = true;
           number = true;
           wrap = true;
+          linebreak = true;
           scrolloff = 15;
+          foldmethod = "marker";
+          splitright = true;
+          ignorecase = true;
+          smartcase = true;
           clipboard = "unnamedplus";
+          cursorline = true;
         };
 
         utility.smart-splits = {
