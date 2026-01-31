@@ -297,6 +297,7 @@ binds {
     Mod+W { toggle-column-tabbed-display; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Shift+Escape { spawn "wtype" "`"; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+E { quit; }

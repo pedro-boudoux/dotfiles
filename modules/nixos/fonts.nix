@@ -14,5 +14,6 @@
       nerd-fonts.dejavu-sans-mono
       nerd-fonts.commit-mono
       googlesans-code
+      noto-fonts
     ];
 }

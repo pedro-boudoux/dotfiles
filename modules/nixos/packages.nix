@@ -88,5 +88,6 @@
     gimp
     texlive.combined.scheme-full
     zathura
+    wtype
   ];
 }
