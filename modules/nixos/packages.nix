@@ -89,5 +89,7 @@
     texlive.combined.scheme-full
     zathura
     wtype
+    libgcc
+    gnumake
   ];
 }

@@ -78,7 +78,7 @@
     defaultFonts = {
       serif = ["Tinos Nerd Font"];
       sansSerif = ["Work Sans"];
-      monospace = ["MartianMono Nerd Font Mono"];
+      monospace = ["Monaspace Neon"];
     };
   };
 
