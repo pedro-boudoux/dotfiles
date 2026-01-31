@@ -21,7 +21,7 @@
   home.packages = with pkgs; [
     orchis-theme
     papirus-icon-theme
-    bibata-cursors
+    whitesur-cursors
     mako
     starship
     fish
@@ -50,6 +50,7 @@
   home.file = {
     ".config/niri/config.kdl".source = ./niri/config.kdl;
     ".config/waybar/style.css".source = ./waybar/style.css;
+    ".config/DankMaterialShell/settings.json".source = ./dank-material-shell/settings.json;
   };
 
   programs.home-manager.enable = true;
@@ -85,13 +86,13 @@
     enable = true;
     theme = { package = pkgs.orchis-theme; name = "Orchis-Dark"; };
     iconTheme = { package = pkgs.papirus-icon-theme; name = "Papirus"; };
-    cursorTheme = { name = "Bibata-Modern-Ice"; package = pkgs.bibata-cursors; };
+    cursorTheme = { name = "WhiteSur-cursors"; package = pkgs.whitesur-cursors; };
   };
 
   home.pointerCursor = {
     enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Ice";
+    package = pkgs.whitesur-cursors;
+    name = "WhiteSur-cursors";
     size = 24;
     gtk.enable = true;
   };
