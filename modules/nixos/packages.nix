@@ -91,5 +91,6 @@
     wtype
     libgcc
     gnumake
+    bat
   ];
 }

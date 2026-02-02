@@ -2,6 +2,7 @@
   imports = [
     inputs.dankMaterialShell.homeModules.dankMaterialShell.default
     inputs.niri.homeModules.niri
+    inputs.dms-plugin-registry.modules.default
     ./kitty.nix
     ./swww.nix
     ./wofi.nix
@@ -50,7 +51,15 @@
   home.file = {
     ".config/niri/config.kdl".source = ./niri/config.kdl;
     ".config/waybar/style.css".source = ./waybar/style.css;
-    ".config/DankMaterialShell/settings.json".source = ./dank-material-shell/settings.json;
+    # Copy instead of symlink so DankMaterialShell can modify these files at runtime
+    ".config/DankMaterialShell/settings.json" = {
+      source = ./dank-material-shell/settings.json;
+      force = true;
+    };
+    ".config/DankMaterialShell/themes/gruvbox-material.json" = {
+      source = ./dank-material-shell/gruvbox-material.json;
+      force = true;
+    };
   };
 
   programs.home-manager.enable = true;
@@ -115,6 +124,19 @@
       "x-scheme-handler/about" = "firefox.desktop";
       "x-scheme-handler/unknown" = "firefox.desktop";
       "application/pdf" = "okular.desktop";
+    };
+  };
+
+  # Prevent DankMaterialShell from overriding GNOME settings
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      text-scaling-factor = 1.1;  # 110% UI scale
+      font-name = "Work Sans 11";  # Adjust to your preferred font
+      document-font-name = "Work Sans 11";
+      monospace-font-name = "Monaspace Neon 10";
+    };
+    "org/gnome/system/location" = {
+      enabled = true;  # Set to false if you don't want location
     };
   };
 }

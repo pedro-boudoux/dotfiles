@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
     ./packages.nix
     ./fonts.nix
@@ -56,13 +56,18 @@
   programs.niri.enable = true;
   services.xserver.xkb = { layout = "us"; variant = ""; };
   
-  services.greetd = {
+  # DankGreeter display manager (shared across all hosts)
+  services.displayManager.dms-greeter = {
     enable = true;
-    settings.default_session = {
-      command = "${pkgs.niri}/bin/niri-session";
-      user = "pedro";
-    };
+    compositor.name = "niri";
+    package = inputs.dankMaterialShell.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    configHome = "/home/pedro";
+    configFiles = [
+      "/home/pedro/.config/DankMaterialShell/settings.json"
+      "/home/pedro/.config/DankMaterialShell/themes/gruvbox-material.json"
+    ];
   };
+  
   services.getty.autologinUser = "pedro";
 
   # portals
