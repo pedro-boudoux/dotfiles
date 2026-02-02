@@ -20,9 +20,10 @@
   home.stateVersion = "25.05";
 
   home.packages = with pkgs; [
-    orchis-theme
+    whitesur-gtk-theme
     papirus-icon-theme
     whitesur-cursors
+    qt6Packages.qt6ct
     mako
     starship
     fish
@@ -43,6 +44,10 @@
       ExecStart = "${inputs.dankMaterialShell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/dms run";
       Restart = "on-failure";
       RestartSec = 5;
+      Environment = [
+        "QT_QPA_PLATFORMTHEME=qt6ct"
+        "QS_ICON_THEME=Papirus-Dark"
+      ];
     };
     Install.WantedBy = ["graphical-session.target"];
   };
@@ -60,6 +65,12 @@
       source = ./dank-material-shell/gruvbox-material.json;
       force = true;
     };
+    ".config/DankMaterialShell/themes/whitesur.json" = {
+      source = ./dank-material-shell/whitesur.json;
+      force = true;
+    };
+    # Link Papirus icon theme for DMS launcher
+    ".icons/Papirus-Dark".source = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
   };
 
   programs.home-manager.enable = true;
@@ -93,10 +104,19 @@
 
   gtk = {
     enable = true;
-    theme = { package = pkgs.orchis-theme; name = "Orchis-Dark"; };
-    iconTheme = { package = pkgs.papirus-icon-theme; name = "Papirus"; };
+    theme = { package = pkgs.whitesur-gtk-theme; name = "WhiteSur-Dark"; };
+    iconTheme = { package = pkgs.papirus-icon-theme; name = "Papirus-Dark"; };
     cursorTheme = { name = "WhiteSur-cursors"; package = pkgs.whitesur-cursors; };
+    gtk3.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = true;
+    };
   };
+
+  xdg.configFile."gtk-3.0/settings.ini".force = true;
+  xdg.configFile."gtk-4.0/settings.ini".force = true;
 
   home.pointerCursor = {
     enable = true;
@@ -138,5 +158,24 @@
     "org/gnome/system/location" = {
       enabled = true;  # Set to false if you don't want location
     };
+  };
+
+  # Qt6ct configuration for DMS icon theming
+  xdg.configFile."qt6ct/qt6ct.conf" = {
+    force = true;
+    text = ''
+      [Appearance]
+      icon_theme=Papirus-Dark
+      
+      [Fonts]
+      general=Work Sans,11,-1,5,50,0,0,0,0,0
+      fixed=Monaspace Neon,10,-1,5,50,0,0,0,0,0
+    '';
+  };
+
+  # Environment variables for Qt theming
+  home.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt6ct";
+    QS_ICON_THEME = "WhiteSur";
   };
 }
