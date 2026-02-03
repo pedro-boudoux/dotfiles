@@ -92,5 +92,8 @@
     libgcc
     gnumake
     bat
+    authenticator
+    appflowy
+    zenity # Required for file picker dialogs in Flutter apps (AppFlowy)
   ];
 }

@@ -78,9 +78,10 @@
       pkgs.xdg-desktop-portal-gnome
     ];
     config = {
-      common.default = "gtk";
+      common.default = "*";
       niri = {
         default = [ "gnome" "gtk" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
         "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
         "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
       };

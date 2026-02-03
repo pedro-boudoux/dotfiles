@@ -16,5 +16,10 @@
       nerd-fonts.monaspace
       googlesans-code
       noto-fonts
+      texlivePackages.opensans
+      texlivePackages.montserrat
+      poppins
+      dm-sans
+      
     ];
 }

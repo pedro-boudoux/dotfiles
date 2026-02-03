@@ -12,6 +12,7 @@
     ./matugen
     ./nvf
     ./tmux
+    ./appflowy
     # ./waybar # was commented out in original
   ];
 
@@ -52,6 +53,58 @@
       ];
     };
     Install.WantedBy = ["graphical-session.target"];
+  };
+
+  # Authenticator autostart service
+  systemd.user.services.authenticator = {
+    Unit = {
+      Description = "Authenticator";
+      After = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.authenticator}/bin/authenticator";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install.WantedBy = ["graphical-session.target"];
+  };
+
+  # Notification script for new TOTP codes
+  home.file.".local/bin/authenticator-notify" = {
+    executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      # Monitor Authenticator for new codes and send notifications
+      
+      while true; do
+        # Check if authenticator is running
+        if pgrep -x "authenticator" > /dev/null; then
+          # Use dbus to monitor for code changes (if available)
+          # Or check every 30 seconds and notify when codes refresh
+          sleep 30
+          
+          # Send notification through mako
+          notify-send -a "Authenticator" -i "dialog-password" "New TOTP Codes Available" "Your 2FA codes have been refreshed"
+        else
+          sleep 5
+        fi
+      done
+    '';
+  };
+
+  # Autostart the notification monitor
+  systemd.user.services.authenticator-notify = {
+    Unit = {
+      Description = "Authenticator Notification Monitor";
+      After = ["authenticator.service"];
+      PartOf = ["authenticator.service"];
+    };
+    Service = {
+      ExecStart = "%h/.local/bin/authenticator-notify";
+      Restart = "always";
+    };
+    Install.WantedBy = ["authenticator.service"];
   };
 
   # FIXED: relative paths. this makes it portable.
