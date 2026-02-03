@@ -22,7 +22,7 @@
   home.packages = with pkgs; [
     whitesur-gtk-theme
     papirus-icon-theme
-    whitesur-cursors
+    bibata-cursors
     qt6Packages.qt6ct
     mako
     starship
@@ -47,6 +47,8 @@
       Environment = [
         "QT_QPA_PLATFORMTHEME=qt6ct"
         "QS_ICON_THEME=Papirus-Dark"
+        "XCURSOR_THEME=Bibata-Modern-Ice"
+        "XCURSOR_SIZE=24"
       ];
     };
     Install.WantedBy = ["graphical-session.target"];
@@ -69,8 +71,9 @@
       source = ./dank-material-shell/whitesur.json;
       force = true;
     };
-    # Link Papirus icon theme for DMS launcher
+    # Link Papirus icon theme and Bibata cursor for DMS
     ".icons/Papirus-Dark".source = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
+    ".icons/Bibata-Modern-Ice".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
   };
 
   programs.home-manager.enable = true;
@@ -106,7 +109,7 @@
     enable = true;
     theme = { package = pkgs.whitesur-gtk-theme; name = "WhiteSur-Dark"; };
     iconTheme = { package = pkgs.papirus-icon-theme; name = "Papirus-Dark"; };
-    cursorTheme = { name = "WhiteSur-cursors"; package = pkgs.whitesur-cursors; };
+    cursorTheme = { name = "Bibata-Modern-Ice"; package = pkgs.bibata-cursors; };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = true;
     };
@@ -120,8 +123,8 @@
 
   home.pointerCursor = {
     enable = true;
-    package = pkgs.whitesur-cursors;
-    name = "WhiteSur-cursors";
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
     size = 24;
     gtk.enable = true;
   };
@@ -176,6 +179,8 @@
   # Environment variables for Qt theming
   home.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt6ct";
-    QS_ICON_THEME = "WhiteSur";
+    QS_ICON_THEME = "Papirus-Dark";
+    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_SIZE = "24";
   };
 }
