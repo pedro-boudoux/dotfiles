@@ -4,12 +4,12 @@
   # and can be imported through the AppFlowy settings UI
   home.file = {
     ".local/share/appflowy/flowy_themes/Gruvbox-Dark/Gruvbox-Dark.dark.json" = {
-      source = ./gruvbox-dark.json;
+      text = builtins.readFile ./gruvbox-dark.json;
       force = true;
     };
     
     ".local/share/appflowy/flowy_themes/Gruvbox-Dark/Gruvbox-Dark.light.json" = {
-      source = ./gruvbox-light.json;
+      text = builtins.readFile ./gruvbox-light.json;
       force = true;
     };
   };
