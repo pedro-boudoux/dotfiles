@@ -1,0 +1,33 @@
+{
+    "explorer.confirmDelete": false,
+    "workbench.colorTheme": "Gruvbox Dark Medium",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false
+    },
+    "editor.wordWrap": "on",
+    "git.enableSmartCommit": true,
+    "editor.lineNumbers": "relative",
+    "git.autofetch": true,
+    "explorer.confirmDragAndDrop": false,
+    "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09', 'ss10', 'liga'",
+    "editor.fontFamily": "'MonaspiceNe Nerd Font Mono'",
+    "svelte.enable-ts-plugin": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.cursorSurroundingLines": 10,
+    "vim.enableNeovim": true,
+    "vim.leader": " ",
+    "vim.neovimUseConfigFile": true,
+    "vim.replaceWithRegister": true,
+    "vim.statusBarColorControl": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
+        "statusBar.debuggingBackground": "#5f0000",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
+    },
+    "workbench.iconTheme": "material-icon-theme"
+}

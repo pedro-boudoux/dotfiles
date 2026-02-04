@@ -15,6 +15,8 @@
     ./appflowy
     ./firefox.nix
     ./antigravity.nix
+    ./vscode.nix
+    ./spicetify.nix
     # ./waybar # was commented out in original
   ];
 
@@ -30,7 +32,6 @@
     mako
     starship
     fish
-    spicetify-cli
     matugen
     tmux
   ];
@@ -68,6 +69,7 @@
       ExecStart = "${pkgs.authenticator}/bin/authenticator";
       Restart = "on-failure";
       RestartSec = 5;
+      RestartMode = "isolate";
     };
     Install.WantedBy = ["graphical-session.target"];
   };
@@ -100,11 +102,11 @@
     Unit = {
       Description = "Authenticator Notification Monitor";
       After = ["authenticator.service"];
-      PartOf = ["authenticator.service"];
     };
     Service = {
       ExecStart = "%h/.local/bin/authenticator-notify";
       Restart = "always";
+      RestartMode = "isolate";
     };
     Install.WantedBy = ["authenticator.service"];
   };
