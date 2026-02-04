@@ -13,6 +13,7 @@
     ./nvf
     ./tmux
     ./appflowy
+    ./spicetify.nix
     # ./waybar # was commented out in original
   ];
 
@@ -28,7 +29,7 @@
     mako
     starship
     fish
-    spicetify-cli
+    # spicetify-cli is now managed by spicetify-nix
     matugen
     tmux
   ];
