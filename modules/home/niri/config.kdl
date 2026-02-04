@@ -70,8 +70,8 @@ layout {
         // Uncomment this line to disable the focus ring.
         // off
 
-        width 4
-        active-color "#ffffff"
+        width 2
+        active-color "#ddc7a1"
 
         // Color of the ring on inactive monitors.
         inactive-color "#505050"
@@ -156,6 +156,12 @@ layer-rule {
 
     // LAYER RULES FOR MAKO NOTIFICATIONS FOR WHEN I FIGURE THIS OUT
 
+}
+
+// Force DankMaterialShell bar to have corner radius of 25
+layer-rule {
+    match namespace="dms:bar"
+    geometry-corner-radius 25
 }
 
 window-rule {

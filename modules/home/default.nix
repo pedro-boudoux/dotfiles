@@ -115,17 +115,17 @@
   home.file = {
     ".config/niri/config.kdl".source = ./niri/config.kdl;
     ".config/waybar/style.css".source = ./waybar/style.css;
-    # Copy instead of symlink so DankMaterialShell can modify these files at runtime
+    # Use 'text' to create actual copies (not symlinks) that DMS can modify at runtime
     ".config/DankMaterialShell/settings.json" = {
-      source = ./dank-material-shell/settings.json;
+      text = builtins.readFile ./dank-material-shell/settings.json;
       force = true;
     };
     ".config/DankMaterialShell/themes/gruvbox-material.json" = {
-      source = ./dank-material-shell/gruvbox-material.json;
+      text = builtins.readFile ./dank-material-shell/gruvbox-material.json;
       force = true;
     };
     ".config/DankMaterialShell/themes/whitesur.json" = {
-      source = ./dank-material-shell/whitesur.json;
+      text = builtins.readFile ./dank-material-shell/whitesur.json;
       force = true;
     };
     # Link Papirus icon theme and Bibata cursor for DMS
