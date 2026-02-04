@@ -14,6 +14,7 @@
     ./tmux
     ./appflowy
     ./firefox.nix
+    ./antigravity.nix
     # ./waybar # was commented out in original
   ];
 
