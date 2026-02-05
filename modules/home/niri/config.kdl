@@ -158,11 +158,7 @@ layer-rule {
 
 }
 
-// Force DankMaterialShell bar to have corner radius of 25
-layer-rule {
-    match namespace="dms:bar"
-    geometry-corner-radius 25
-}
+
 
 window-rule {
     geometry-corner-radius 25
@@ -176,7 +172,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
     Mod+Return hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+E {spawn "thunar";}
-    Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+D hotkey-overlay-title="Run Application Launcher" { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
     Mod+S { spawn-sh "grim -g \"$(slurp)\" - | swappy -f -"; }
 

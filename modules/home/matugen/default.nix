@@ -22,7 +22,7 @@
     color15 {{surfaceText}}
   '';
 
-  # 2. define the main config that dms will unknowingly use
+  # Main matugen configuration
   xdg.configFile."matugen/config.toml".text = ''
     [config]
     reload_on_change = true

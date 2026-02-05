@@ -56,16 +56,15 @@
   programs.niri.enable = true;
   services.xserver.xkb = { layout = "us"; variant = ""; };
   
-  # DankGreeter display manager (shared across all hosts)
-  services.displayManager.dms-greeter = {
+  # Greeter (using greetd with tuigreet)
+  services.greetd = {
     enable = true;
-    compositor.name = "niri";
-    package = inputs.dankMaterialShell.packages.${pkgs.stdenv.hostPlatform.system}.default;
-    configHome = "/home/pedro";
-    configFiles = [
-      "/home/pedro/.config/DankMaterialShell/settings.json"
-      "/home/pedro/.config/DankMaterialShell/themes/gruvbox-material.json"
-    ];
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
+        user = "greeter";
+      };
+    };
   };
   
   services.getty.autologinUser = "pedro";

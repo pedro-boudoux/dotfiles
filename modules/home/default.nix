@@ -1,8 +1,7 @@
 { pkgs, inputs, ... }: {
   imports = [
-    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+    inputs.noctalia.homeModules.default
     inputs.niri.homeModules.niri
-    inputs.dms-plugin-registry.modules.default
     ./kitty.nix
     ./swww.nix
     ./wofi.nix
@@ -36,27 +35,25 @@
     tmux
   ];
 
-  programs.dankMaterialShell.enable = true;
 
-  systemd.user.services.dank-material-shell = {
-    Unit = {
-      Description = "Dank Material Shell";
-      After = ["graphical-session.target"];
-      PartOf = ["graphical-session.target"];
+
+  # Noctalia Shell
+  programs.noctalia-shell = {
+    enable = true;
+    systemd.enable = true;
+    # Basic settings - customize as needed
+    settings = {
+      bar = {
+        density = "default";
+        position = "top";
+      };
+      general = {
+        radiusRatio = 0.3;
+      };
     };
-    Service = {
-      ExecStart = "${inputs.dankMaterialShell.packages.${pkgs.stdenv.hostPlatform.system}.default}/bin/dms run";
-      Restart = "on-failure";
-      RestartSec = 5;
-      Environment = [
-        "QT_QPA_PLATFORMTHEME=qt6ct"
-        "QS_ICON_THEME=Papirus-Dark"
-        "XCURSOR_THEME=Bibata-Modern-Ice"
-        "XCURSOR_SIZE=24"
-      ];
-    };
-    Install.WantedBy = ["graphical-session.target"];
   };
+
+
 
   # Authenticator autostart service
   systemd.user.services.authenticator = {
@@ -115,20 +112,7 @@
   home.file = {
     ".config/niri/config.kdl".source = ./niri/config.kdl;
     ".config/waybar/style.css".source = ./waybar/style.css;
-    # Use 'text' to create actual copies (not symlinks) that DMS can modify at runtime
-    ".config/DankMaterialShell/settings.json" = {
-      text = builtins.readFile ./dank-material-shell/settings.json;
-      force = true;
-    };
-    ".config/DankMaterialShell/themes/gruvbox-material.json" = {
-      text = builtins.readFile ./dank-material-shell/gruvbox-material.json;
-      force = true;
-    };
-    ".config/DankMaterialShell/themes/whitesur.json" = {
-      text = builtins.readFile ./dank-material-shell/whitesur.json;
-      force = true;
-    };
-    # Link Papirus icon theme and Bibata cursor for DMS
+    # Link icon themes
     ".icons/Papirus-Dark".source = "${pkgs.papirus-icon-theme}/share/icons/Papirus-Dark";
     ".icons/Bibata-Modern-Ice".source = "${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice";
   };
@@ -207,7 +191,6 @@
     };
   };
 
-  # Prevent DankMaterialShell from overriding GNOME settings
   dconf.settings = {
     "org/gnome/desktop/interface" = {
       text-scaling-factor = 1.1;  # 110% UI scale
@@ -220,7 +203,7 @@
     };
   };
 
-  # Qt6ct configuration for DMS icon theming
+  # Qt6ct configuration for icon theming
   xdg.configFile."qt6ct/qt6ct.conf" = {
     force = true;
     text = ''
