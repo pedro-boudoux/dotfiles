@@ -1,6 +1,5 @@
 { pkgs, inputs, ... }: {
   imports = [
-    inputs.noctalia.homeModules.default
     inputs.niri.homeModules.niri
     ./kitty.nix
     ./swww.nix
@@ -16,6 +15,7 @@
     ./antigravity.nix
     ./vscode.nix
     ./spicetify.nix
+    ./noctalia
     # ./waybar # was commented out in original
   ];
 
@@ -35,23 +35,19 @@
     tmux
   ];
 
-
-
-  # Noctalia Shell
-  programs.noctalia-shell = {
+  # Flatpak (declarative)
+  services.flatpak = {
     enable = true;
-    systemd.enable = true;
-    # Basic settings - customize as needed
-    settings = {
-      bar = {
-        density = "default";
-        position = "top";
-      };
-      general = {
-        radiusRatio = 0.3;
-      };
-    };
+    remotes = [{
+      name = "flathub";
+      location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+    }];
+    packages = [
+      "io.github.nickvision.figma"
+    ];
   };
+
+
 
 
 

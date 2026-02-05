@@ -52,6 +52,9 @@
   virtualisation.libvirtd.enable = true;
   virtualisation.docker.enable = true;
 
+  # flatpak
+  services.flatpak.enable = true;
+
   # graphical shell (niri)
   programs.niri.enable = true;
   services.xserver.xkb = { layout = "us"; variant = ""; };

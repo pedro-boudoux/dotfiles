@@ -18,6 +18,7 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
   };
 
   outputs = {
@@ -41,7 +42,7 @@
             home-manager.extraSpecialArgs = {inherit inputs;};
             home-manager.users.pedro = import ./modules/home/default.nix;
             # fix: define nvf as a shared module for HM
-            home-manager.sharedModules = [ nvf.homeManagerModules.default ];
+            home-manager.sharedModules = [ nvf.homeManagerModules.default inputs.nix-flatpak.homeManagerModules.nix-flatpak ];
           }
         ];
       };
