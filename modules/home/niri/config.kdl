@@ -123,6 +123,7 @@ layout {
 //spawn-at-startup "systemctl" "--user" "start" "dank-material-shell.service"
 spawn-sh-at-startup "rclone mount gdrive: /home/pedro/gdrive --vfs-cache-mode writes"
 spawn-sh-at-startup "swww-daemon & sleep 1"
+spawn-at-startup "noctalia-shell"
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 

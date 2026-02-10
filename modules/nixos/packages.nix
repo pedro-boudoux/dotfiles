@@ -96,5 +96,8 @@
     appflowy
     zenity # Required for file picker dialogs in Flutter apps (AppFlowy)
     gedit
+    lshw
+    hardinfo2
+    popsicle
   ];
 }
